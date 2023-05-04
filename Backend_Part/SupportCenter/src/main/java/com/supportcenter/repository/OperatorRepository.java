@@ -6,23 +6,34 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.expression.spel.ast.Operator;
 import org.springframework.stereotype.Repository;
 
+import com.supportcenter.exception.CallException;
+import com.supportcenter.exception.CustomerException;
+import com.supportcenter.exception.IssueException;
+import com.supportcenter.service.Customer;
+import com.supportcenter.service.Issue;
+
 @Repository
 public interface OperatorRepository extends JpaRepository<Operator, Integer>{
 
-	public String registerCustomer(Customer customer);
+	public Issue addCustomerIssue(Issue issue) throws CustomerException, CallException;
 
-	// Customer will register himself by passing customer details.	
+    public String sendIntimationEmailToCustomer(Integer customerId) throws CustomerException;
+
+    public Issue modifyCustomerIssue(Issue issue) throws IssueException;
+
+    public String sendModificationEmailToCustomer(Integer customerId) throws CustomerException;
+
+    public Issue closeCustomerIssue(Issue issue) throws IssueException;
+
+    public Customer findCustomerById(Integer customerId) throws CustomerException;
+
+    public List<Customer> findCustomerByName(String customerName) throws CustomerException;
+
+    public Customer findCustomerByEmail(String email) throws CustomerException;
+
+    public boolean lockCustomerWithOperator(Integer customerId, String opoeratorKey) throws CustomerException;
+
 	
 	
 	
-	
-	public Issue viewIssueById(Integer issueId,  Integer customerId);
-	
-//	Customer will validae himself using customerId and with the help of issueId he can view his issue
-	
-	public Issue reopenIssue(Integer issueId);
-	public List<Issue> viewAllIssueId(Integer customerId);
-	public String changePassword(Integer customerId , Login credentials);
-	public String forgotPassword(Integer customerId);
-	public Customer emailPassword(Integer customerId);
 }
