@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: 'Poppins',sans-serif;
+}
+
+:root{
+    --bg-color: #fcfc5f;
+    --second-bg-color: #323946;
+    --text-color: #fff;
+    --main-color:rgb(0, 195, 255);
+    --extra-color1:#000000;
+  }
+
+body{
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+#nav-menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 5%;
+    padding: 2rem 5%;
+    background: var(--extra-color1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+   
+  }
+
+  #nav-menu .project_logo{
+    width: 50%;
+    height: 100%;
+  }
+
+  .project_logo{
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .project_logo img{
+    width: 10%;
+  }
+
+  .project_logo h1{
+    font-size: 2rem;
+  }
+
+  .navbar a{
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin-left: 4rem;
+    transition: .4s;
+  }
+
+  .navbar a:hover{
+    color: var(--main-color);
+  }
+
+  .menu button{
+    display: block;
+  } 
+
+  .menu{
+    margin: auto;
+    margin-top: 15rem;
+    min-height: 50vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .menu div h2{
+    font-size: 50px;
+    color: var(--extra-color1);
+  }
+
+  .menu div form{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .menu div form input,label{
+    width: 25rem;
+    padding: 15px;
+    font-size: 20px;
+  }
+
+  .menu div form label{
+    color: var(--extra-color1);
+    margin-top: 15px;
+  }
+
+  .menu div form label span{
+    color: red;
+  }
+
+  .menu div form input{
+    border-radius: 5px;
+    transition: .5s ease;
+  }
+
+  .menu div form input:hover{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
