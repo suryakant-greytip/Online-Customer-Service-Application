@@ -2,6 +2,8 @@ package com.supportcenter.service;
 
 import com.supportcenter.exception.CustomerException;
 import com.supportcenter.exception.IssueException;
+import com.supportcenter.repository.CustomerRepository;
+import com.supportcenter.repository.IssueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
