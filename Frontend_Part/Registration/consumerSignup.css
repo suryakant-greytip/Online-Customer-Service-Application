@@ -82,37 +82,60 @@ body{
     flex-direction: column;
   }
 
-  .menu div{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-  }
-
   .menu div h2{
     font-size: 50px;
     color: var(--extra-color1);
   }
 
-  .menu div button{
-    width: 25rem;
-    margin: 20px;
-    padding: 20px;
-    font-size: 20px;
+  .menu div form{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 
+  .menu div form input,label{
+    width: 25rem;
+    padding: 15px;
+    font-size: 20px;
+  }
+
+  .menu div form label{
+    color: var(--extra-color1);
+    margin-top: 15px;
+  }
+
+  .menu div form label span{
+    color: red;
+  }
+
+  .menu div form input{
+    border-radius: 5px;
+    transition: .5s ease;
+  }
+
+  .menu div form input:hover{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  .menu div form button{
+    width: 50%;
+    height: 3.5rem;
+    margin: auto;
+    margin-top: 2.5rem;
+    margin-bottom: 3rem;
+    font-size: 20px;
     display: inline-block;
-    padding: 1rem 2.8rem;
     background: var(--main-color);
     border-radius: 4rem;
-    box-shadow: 0 0 .5rem var(--main-color);
+    box-shadow: 0 0 .4rem var(--main-color);
     color: var(--extra-color1);
     letter-spacing: .1rem;
     font-weight: 600;
     transition: .4s ease;
   }
 
-  .menu div button:hover{
+  .menu div form button:hover{
     box-shadow: none;
     cursor: pointer;
   }
-
