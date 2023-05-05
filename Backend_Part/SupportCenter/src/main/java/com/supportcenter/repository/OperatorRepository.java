@@ -15,23 +15,23 @@ import com.supportcenter.service.Issue;
 @Repository
 public interface OperatorRepository extends JpaRepository<Operator, Integer>{
 
-	public Issue addCustomerIssue(Issue issue) throws CustomerException, CallException;
+	public Issue addCustomerIssue(Issue issue);
 
-    public String sendIntimationEmailToCustomer(Integer customerId) throws CustomerException;
+    public String sendIntimationEmailToCustomer(Integer customerId);
 
-    public Issue modifyCustomerIssue(Issue issue) throws IssueException;
+    public Issue modifyCustomerIssue(Issue issue);
 
-    public String sendModificationEmailToCustomer(Integer customerId) throws CustomerException;
+    public String sendModificationEmailToCustomer(Integer customerId);
 
-    public Issue closeCustomerIssue(Issue issue) throws IssueException;
+    public Issue closeCustomerIssue(Issue issue);
 
-    public Customer findCustomerById(Integer customerId) throws CustomerException;
+    public Customer findCustomerById(Integer customerId);
 
-    public List<Customer> findCustomerByName(String customerName) throws CustomerException;
+    public List<Customer> findCustomerByName(String customerName);
 
-    public Customer findCustomerByEmail(String email) throws CustomerException;
+    public Customer findCustomerByEmail(String email);
 
-    public boolean lockCustomerWithOperator(Integer customerId, String opoeratorKey) throws CustomerException;
+    public boolean lockCustomerWithOperator(Integer customerId, String operatorId);
 
 	
 	
