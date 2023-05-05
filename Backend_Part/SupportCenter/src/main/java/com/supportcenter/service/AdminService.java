@@ -1,11 +1,15 @@
 package com.supportcenter.service;
 
+
 import com.supportcenter.exception.DepartmentException;
 import com.supportcenter.exception.OperatorException;
-import org.springframework.expression.spel.ast.Operator;
+import com.supportcenter.model.Department;
+import com.supportcenter.model.Operator;
+
+import java.util.List;
 
 public interface AdminService {
-    public boolean addDepartment(Department department)throws DepartmentException;
+    public Department addDepartment(Department department)throws DepartmentException;
 
     public boolean removeDepartment(Integer departmentId)throws DepartmentException;
 
@@ -14,9 +18,9 @@ public interface AdminService {
     public Department findDepartmentById(int id)throws DepartmentException;
 
 
-    public boolean addOperator(Integer departmentID,Operator operator)throws OperatorException;
+    public Operator addOperator(Integer departmentID, Operator operator)throws OperatorException;
 
-    public boolean removeOperator(Integer operatorId) throws OperatorException;
+    public String removeOperator(Integer operatorId) throws OperatorException;
 
     public Operator modifyOperator(Operator operator)throws OperatorException;
 

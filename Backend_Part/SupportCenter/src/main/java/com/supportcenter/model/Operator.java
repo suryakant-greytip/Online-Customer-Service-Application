@@ -1,9 +1,8 @@
 package com.supportcenter.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -12,6 +11,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -40,7 +42,22 @@ public class Operator {
 	 @NotNull
 	 (message = "Mandatory field")
 	 private String city;
-	
+
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "operator")
+	private List<Call> calls = new ArrayList<>();
+
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "operator")
+	private List<Solution> solutions = new ArrayList<>();
+
+
+	@ManyToOne
+	@JoinColumn(name = "departmentId")
+	@Valid
+	private Department department;
 	
 	
 }

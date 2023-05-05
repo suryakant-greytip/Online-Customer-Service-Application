@@ -2,10 +2,8 @@ package com.supportcenter.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -37,4 +35,21 @@ public class Call {
 	@NotNull(message = "Mandatory field")
 	@Pattern(regexp = "^[0-9]{10}$", message = "Invalid mobile number")
 	private String phoneNumber;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "customerId")
+	@Valid
+	private Customer customer;
+
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "operatorId")
+	@Valid
+	private Operator operator;
+
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "issueId")
+	@Valid
+	private Issue issue;
 }
