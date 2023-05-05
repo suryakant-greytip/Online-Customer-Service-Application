@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface OperatorService {
 
-    public Issue addCustomerIssue(Issue issue) throws CustomerException, CallException;
+    public String addCustomerIssue(Issue issue) throws IssueException;
 
     public String sendIntimationEmailToCustomer(Integer customerId) throws CustomerException;
 
