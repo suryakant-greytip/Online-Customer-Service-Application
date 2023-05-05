@@ -2,15 +2,13 @@ package com.supportcenter.service;
 
 import com.supportcenter.exception.CustomerException;
 import com.supportcenter.exception.IssueException;
-import com.supportcenter.model.Customer;
-import com.supportcenter.model.Issue;
-import com.supportcenter.model.IssueStatus;
-import com.supportcenter.model.Login;
+import com.supportcenter.model.*;
 import com.supportcenter.repository.CustomerRepository;
 import com.supportcenter.repository.IssueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -49,8 +47,20 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public List<Issue> viewAllIssueId(Integer customerId) {
-        return null;
+    public List<Issue> viewAllIssueId(Integer customerId) throws CustomerException {
+
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+        if (optionalCustomer.isPresent()) {
+            Customer customer = optionalCustomer.get();
+            List<Issue> issues = customer.getIssues();
+            if (issues == null || issues.isEmpty()) {
+                throw new CustomerException("No issues found for customer with id: " + customerId);
+            } else {
+                return issues;
+            }
+        } else {
+            throw new CustomerException("Customer with id: " + customerId + " not found");
+        }
     }
 
     @Override
