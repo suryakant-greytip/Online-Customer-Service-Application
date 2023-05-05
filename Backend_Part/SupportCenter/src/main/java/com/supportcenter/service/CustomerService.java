@@ -12,7 +12,7 @@ public interface CustomerService {
     public String registerCustomer(Customer customer) throws CustomerException;
     public Issue viewIssueById(Integer issueId, Integer customerId) throws IssueException;
     public Issue reopenIssue(Integer issueId) throws IssueException;
-    public List<Issue> viewAllIssueId(Integer customerId);
+    public List<Issue> viewAllIssueId(Integer customerId) throws CustomerException;
     public String changePassword(Integer customerId , Login credentials) throws CustomerException;
     public String forgotPassword(Integer customerId) throws CustomerException;
     public Customer emailPassword(Integer customerId) throws CustomerException;

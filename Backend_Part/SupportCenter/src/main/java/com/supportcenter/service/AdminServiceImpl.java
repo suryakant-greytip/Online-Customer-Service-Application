@@ -20,6 +20,7 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private OperatorRepository operatorRepository;
 
+
     @Override
     public Department addDepartment(Department department) throws DepartmentException {
         return departmentRepository.save(department);
@@ -70,7 +71,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Operator modifyOperator(Operator operator) throws OperatorException {
-        com.supportcenter.model.Operator existingOperator = operatorRepository.findById(operator.getOperatorId())
+        Operator existingOperator = operatorRepository.findById(operator.getOperatorId())
                 .orElseThrow(() -> new OperatorException("Operator not found"));
         existingOperator.setFirstName(operator.getFirstName());
         existingOperator.setLastName(operator.getLastName());
@@ -82,8 +83,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Operator findOperatorbyId(Integer operatorId) throws OperatorException {
-        return operatorRepository.findById(operatorId)
-                .orElseThrow(() -> new OperatorException("Operator not found"));
+
+        return operatorRepository.findById(operatorId).
+                orElseThrow(() -> new OperatorException("There is no operator with this id "+ operatorId));
     }
 
     @Override

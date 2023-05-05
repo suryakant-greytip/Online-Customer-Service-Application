@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.supportcenter.model.Customer;
 import com.supportcenter.model.Issue;
+import com.supportcenter.model.Operator;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.expression.spel.ast.Operator;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
