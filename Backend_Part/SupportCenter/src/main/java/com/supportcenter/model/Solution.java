@@ -2,10 +2,8 @@ package com.supportcenter.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,4 +29,15 @@ public class Solution {
 	
 	@NotNull(message = "Mandatory field")
 	private LocalDate solutionDate;
+
+
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "issueId")
+	@Valid
+	private Issue issue;
+
+
+	@ManyToOne
+	@JoinColumn(name = "operatorId")
+	private Operator operator;
 }

@@ -4,6 +4,8 @@ import com.supportcenter.exception.CallException;
 import com.supportcenter.exception.CustomerException;
 import com.supportcenter.exception.IssueException;
 import com.supportcenter.exception.LogInException;
+import com.supportcenter.model.Customer;
+import com.supportcenter.model.Issue;
 
 import java.util.List;
 
@@ -25,6 +27,6 @@ public interface OperatorService {
 
     public Customer findCustomerByEmail(String email) throws CustomerException;
 
-    public boolean lockCustomerWithOperator(Integer customerId, String opoeratorKey) throws CustomerException;
+    public boolean lockCustomerWithOperator(Integer customerId, String operatorKey) throws CustomerException;
 
 }

@@ -4,6 +4,9 @@ import com.supportcenter.exception.CallException;
 import com.supportcenter.exception.CustomerException;
 import com.supportcenter.exception.IssueException;
 import com.supportcenter.exception.LogInException;
+import com.supportcenter.model.Customer;
+import com.supportcenter.model.Issue;
+import com.supportcenter.model.IssueStatus;
 import com.supportcenter.repository.CustomerRepository;
 import com.supportcenter.repository.IssueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,11 +53,11 @@ public class OperatorServiceImpl implements OperatorService{
 
     @Override
     public String sendModificationEmailToCustomer(Integer customerId) throws CustomerException {
-        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new CustomerException("No such customer with id="+customerId+" exist...."));
+        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new CustomerException("No such customer with id="+customerId+" exist"));
 
-        return "Dear " + customer.getName() + ",\n\n" +
+        return "Dear " + customer.getFirstName() + ",\n\n" +
                 "We would like to inform you that your issue with ID " +
-                customer.getIssue().get(0).getIssueId() + " has been modified.\n\n" +
+                customer.getIssues().get(0).getIssueId() + " has been modified.\n\n" +
                 "Thank you for using our service.\n\n" +
                 "Best regards,\n" +
                 "The Support Team";
@@ -63,9 +66,9 @@ public class OperatorServiceImpl implements OperatorService{
     @Override
     public Issue closeCustomerIssue(Issue issue) throws IssueException {
 
-        Issue notResolvedIssue = issueRepository.findById(issue.getIssueId()).orElseThrow(() -> new IssueException("No such issue found..."));
+        Issue notResolvedIssue = issueRepository.findById(issue.getIssueId()).orElseThrow(() -> new IssueException("No such issue found"));
 
-        issue.setIssueStatus(IssueStatus.valueOf("RESOLVED"));
+        issue.setStatus(IssueStatus.valueOf("RESOLVED"));
 
         return issueRepository.save(issue);
     }

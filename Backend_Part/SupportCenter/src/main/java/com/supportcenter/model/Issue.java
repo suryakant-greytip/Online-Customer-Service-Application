@@ -12,12 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-enum IssueStatus
-{
-	PENDING,
-	CLOSED
-}
-
 @Data
 @Entity
 @AllArgsConstructor

@@ -2,72 +2,82 @@ package com.supportcenter.service;
 
 import com.supportcenter.exception.DepartmentException;
 import com.supportcenter.exception.OperatorException;
+import com.supportcenter.model.Department;
+import com.supportcenter.model.Operator;
 import com.supportcenter.repository.DepartmentRepository;
 import com.supportcenter.repository.OperatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.ast.Operator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
-public class AdminServiceImpl implements AdminService{
+public class AdminServiceImpl implements AdminService {
 
     @Autowired
-    DepartmentRepository departmentRepository;
+    private DepartmentRepository departmentRepository;
 
     @Autowired
-    OperatorRepository operatorRepository;
+    private OperatorRepository operatorRepository;
 
     @Override
-    public boolean addDepartment(Department department) throws DepartmentException {
-        departmentRepository.save(department);
-        return true;
+    public Department addDepartment(Department department) throws DepartmentException {
+        return departmentRepository.save(department);
     }
 
     @Override
     public boolean removeDepartment(Integer departmentId) throws DepartmentException {
-        departmentRepository.deleteById(departmentId);
-        return true;
+        if (departmentRepository.existsById(departmentId)) {
+            departmentRepository.deleteById(departmentId);
+            return true;
+        } else {
+            throw new DepartmentException("Department not found");
+        }
     }
 
     @Override
     public Department modifyDepartment(Department department) throws DepartmentException {
-        Department department1 = departmentRepository.findById(department.getDepartmentId()).get();
-        department1.setDepartmentName(department1.getDepartmentName());
-
-        departmentRepository.save(department1);
-        return department1;
+        Department existingDepartment = departmentRepository.findById(department.getDepartmentId())
+                .orElseThrow(() -> new DepartmentException("Department not found"));
+        existingDepartment.setDepartmentId(department.getDepartmentId());
+        existingDepartment.setDepartmentName(department.getDepartmentName());
+        return departmentRepository.save(existingDepartment);
     }
 
     @Override
     public Department findDepartmentById(int id) throws DepartmentException {
-        return departmentRepository.findById(id).get();
+        return departmentRepository.findById(id)
+                .orElseThrow(() -> new DepartmentException("Department not found"));
     }
 
     @Override
-    public boolean addOperator(Integer departmentID, Operator operator) throws OperatorException {
+    public Operator addOperator(Integer departmentID, Operator operator) throws OperatorException {
+        Department department = departmentRepository.findById(departmentID)
+                .orElseThrow(() -> new OperatorException("Department not found"));
+        operator.setDepartment(department);
         return operatorRepository.save(operator);
     }
 
     @Override
-    public boolean removeOperator(Integer operatorId) throws OperatorException {
-        operatorRepository.deleteById(operatorId);
-        return true;
+    public String removeOperator(Integer operatorId) throws OperatorException {
+        if (operatorRepository.existsById(operatorId)) {
+            operatorRepository.deleteById(operatorId);
+            return "Operator Removed";
+        } else {
+            throw new OperatorException("Operator not found");
+        }
     }
 
     @Override
     public Operator modifyOperator(Operator operator) throws OperatorException {
-
-        Operator operator1 = operatorRepository.findById(operator.getOperatorId()).get();
-        operator1.setFirstName(operator.getFirstName());
-        operator1.setLastName(operator.getLastName());
-        operator1.setMobile(operator.getMobile());
-        operator1.setEmail(operator.getEmail());
-        operator1.setCity(operator.getCity());
-        operatorRepository.save(operator1);
-        return operator1;
+        com.supportcenter.model.Operator existingOperator = operatorRepository.findById(operator.getOperatorId())
+                .orElseThrow(() -> new OperatorException("Operator not found"));
+        existingOperator.setFirstName(operator.getFirstName());
+        existingOperator.setLastName(operator.getLastName());
+        existingOperator.setMobile(operator.getMobile());
+        existingOperator.setEmail(operator.getEmail());
+        existingOperator.setCity(operator.getCity());
+        return operatorRepository.save(existingOperator);
     }
 
     @Override
@@ -78,7 +88,6 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public List<Operator> findAllOperator() throws OperatorException {
-        List<Operator> operators = operatorRepository.findAll();
-        return operators;
+        return operatorRepository.findAll();
     }
 }
