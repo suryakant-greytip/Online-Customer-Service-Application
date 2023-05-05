@@ -30,8 +30,15 @@ public class OperatorServiceImpl implements OperatorService{
 
 
     @Override
-    public Issue addCustomerIssue(Issue issue) throws CustomerException, CallException {
-        return null;
+    public String addCustomerIssue(Issue issue) throws IssueException {
+        Issue issue1 = issueRepository.save(issue);
+
+        if(issue1.getIssueId() != null){
+            return "Issue has been succesfully saved";
+        }
+        else {
+            throw new IssueException("Issue could not be saved");
+        }
     }
 
     @Override
