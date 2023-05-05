@@ -38,10 +38,15 @@
         <div>
             <form action="#">
                 <label for="email">Email<span>*</span> :</label>
-                <input id="email" type="email" placeholder="Enter Email">
+                <input id="email" type="email" placeholder="Enter Email" required>
                 <label for="email">Password<span>*</span> :</label>
-                <input id="password" type="password" placeholder="Enter Password">
+                <input id="password" type="password" placeholder="Enter Password" >
+                <label for="userType">User Type<span>*</span> :</label>
+                <select name="userType" id="userType" required>
+                    <option value="admin" selected>Admin</option>
+                </select> 
             </form>
+            <a href="../RoleOfUsers/adminRole.html"><button>Login</button></a>
         </div>
     </div>
 

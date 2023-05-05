@@ -94,21 +94,31 @@ body{
     color: var(--extra-color1);
   }
 
-  .menu div button{
-    width: 25rem;
-    margin: 20px;
-    padding: 20px;
-    font-size: 20px;
+  .menu div a{ 
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22rem;
+    height: 4rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    border-radius: 4rem;
+  }
 
+  .menu div button{ 
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    font-size: 22px;
     display: inline-block;
-    padding: 1rem 2.8rem;
     background: var(--main-color);
     border-radius: 4rem;
-    box-shadow: 0 0 .5rem var(--main-color);
+    box-shadow: 0 0 .4rem var(--main-color);
     color: var(--extra-color1);
     letter-spacing: .1rem;
     font-weight: 600;
-    transition: .4s ease;
+    transition: .5s ease;
   }
 
   .menu div button:hover{

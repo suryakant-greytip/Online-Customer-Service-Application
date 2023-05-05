@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>HomePage</title>
+    <link rel="stylesheet" href="./findCustById.css">
+    <title>FindCustomerById</title>
 </head>
 <body>
     <!-- navbar -->
     <div id="nav-menu" >
         <div class="project_logo">
-            <img src="./Images/Customer Support2.png" alt="">
+            <img src="../../Images/Customer Support2.png" alt="">
             <h1>SUPPORT CENTER</h1>
         </div>
            
@@ -19,9 +19,10 @@
 
         <nav class="navbar">
             <!-- <a href="#home"> <img id="logo"  src="./Images/logo.avif" alt=""></a> -->
-            <a href="Login/adminLogin.html">Admin Login</a >
-            <a href="Login/operatorLogin.html">Operator Login</a >
-            <a href="Login/consumerLogin.html">Consumer Login</a >    
+            <a href="./adminLogin.html"  >Admin Login</a >
+            <a href="./operatorLogin.html" >Operator Login</a >
+            <a href="./consumerLogin.html"  >Consumer Login</a >
+
         </nav>    
                
          <!-- <li><button id="resume-button-1" onclick="resume()"><a id="resume-link-1" class="nav-link resume" href="./Image/Suryakant-Singh-Resume.pdf" download="Suryakant_Singh_Resume" target="_blank">Resume</a></button></li>
@@ -30,19 +31,19 @@
     </div>
 
     <!-- Menu -->
+    
     <div id="menu" class="menu">
         <div>
-            <h2>Menu</h2>
+            <h2>Enter Customer Id :</h2>
         </div>
         <div>
-            <a href="Login/adminLogin.html"><button>Login Admin</button></a>
-            <a href="Login/operatorLogin.html"><button>Login Operator</button></a>
-            <a href="Login/consumerLogin.html"><button>Login Consumer</button></a>
-            <a href="./Registration/consumerSignup.html"><button>Register Consumer</button></a>
-            <a href="./ForgotPassword/forgotPassword.html"><button>Forgot Password ?</button></a>
+            <form action="#">
+                <label for="custId">Customer Id<span>*</span> :</label>
+                <input id="custId" type="text" placeholder="Enter Customer Id" required>
+            </form>
+            <a href="#"><button>Find</button></a>
         </div>
     </div>
-    <br><br>
 
 </body>
 </html>
