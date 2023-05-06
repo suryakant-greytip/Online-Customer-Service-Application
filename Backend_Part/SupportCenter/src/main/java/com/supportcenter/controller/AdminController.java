@@ -2,6 +2,7 @@ package com.supportcenter.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.ast.Operator;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.supportcenter.service.CustomerService;
+
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("supportcenteradmin")
 public class AdminController {
+	
+	@Autowired
+	public CustomerService dao;
+	
 	
 	// adding new department
 	

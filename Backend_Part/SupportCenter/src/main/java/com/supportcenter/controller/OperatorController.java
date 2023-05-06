@@ -1,14 +1,19 @@
 package com.supportcenter.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.supportcenter.service.CustomerService;
+
 @RestController
 @RequestMapping("supportcenteroperator")
 public class OperatorController {
 	
+	@Autowired
+	public CustomerService dao;
 	
 	// for login 
 	
