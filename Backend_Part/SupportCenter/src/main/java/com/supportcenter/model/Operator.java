@@ -46,6 +46,7 @@ public class Operator {
 	 (message = "Mandatory field")
 	 private String city;
 
+	 
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "operator")
@@ -63,4 +64,9 @@ public class Operator {
 	private Department department;
 	
 	
+	
+	
+//	operator has Customer list
+//    @JsonIgnore
+//	private List<Customer> blockedCustomerList;
 }
