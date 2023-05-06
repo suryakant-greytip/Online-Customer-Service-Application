@@ -15,12 +15,15 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Repository
 public class Operator {
 
 	@Id
