@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService{
     private IssueRepository issueRepository;
 
     @Override
-    public String registerCustomer(Customer customer) throws CustomerException {
+    public Customer registerCustomer(Customer customer) throws CustomerException {
         Customer existedCustomer = customerRepository.findByEmail(customer.getEmail());
         if(existedCustomer!=null) {
             throw new CustomerException("This customer already exist");
@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService{
 
         Customer registerCustomer = customerRepository.save(customer);
 
-        return "Customer Register Successfully!";
+        return registerCustomer;
     }
 
     @Override
@@ -64,15 +64,15 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public String changePassword(Integer customerId, Login credentials) throws CustomerException {
+    public Customer changePassword(Integer customerId, Login credentials) throws CustomerException {
         Customer customer = customerRepository.findByEmail(credentials.getUsername());
         if(customer == null) {
             throw new CustomerException("Invalid Credentials");
         }
 
         customer.setPassword(credentials.getPassword());
-        customerRepository.save(customer);
-        return "Password changed successfully";
+        
+        return customerRepository.save(customer);
     }
 
     @Override

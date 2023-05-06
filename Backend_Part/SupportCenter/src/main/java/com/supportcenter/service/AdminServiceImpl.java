@@ -1,6 +1,8 @@
 package com.supportcenter.service;
 
+import java.lang.StackWalker.Option;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +30,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public boolean removeDepartment(Integer departmentId) throws DepartmentException {
-        if (departmentRepository.existsById(departmentId)) {
+    public Department removeDepartment(Integer departmentId) throws DepartmentException {
+           Optional<Department> dept= departmentRepository.findById(departmentId);
+           
+           if(dept!=null)
+           {
             departmentRepository.deleteById(departmentId);
-            return true;
-        } else {
+            return dept.get(); 
+            } 
+           else {
             throw new DepartmentException("Department not found");
         }
     }
@@ -61,10 +67,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public String removeOperator(Integer operatorId) throws OperatorException {
-        if (operatorRepository.existsById(operatorId)) {
+    public Operator removeOperator(Integer operatorId) throws OperatorException {
+        Optional<Operator> operator = operatorRepository.findById(operatorId);
+    	if (operator.isPresent()) {
             operatorRepository.deleteById(operatorId);
-            return "Operator Removed";
+            return operator.get() ;
         } else {
             throw new OperatorException("Operator not found");
         }
@@ -92,5 +99,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<Operator> findAllOperator() throws OperatorException {
         List<Operator> operatorList = operatorRepository.findAll();
+        if(operatorList.isEmpty())
+        {
+        	throw new OperatorException("Operator not found");
+        }
+        return operatorList;
     }
 }

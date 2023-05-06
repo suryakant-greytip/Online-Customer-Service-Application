@@ -1,20 +1,18 @@
 package com.supportcenter.service;
 
-import com.supportcenter.exception.CallException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
 import com.supportcenter.exception.CustomerException;
 import com.supportcenter.exception.IssueException;
-import com.supportcenter.exception.LogInException;
 import com.supportcenter.model.Customer;
 import com.supportcenter.model.Issue;
 import com.supportcenter.model.IssueStatus;
 import com.supportcenter.repository.CustomerRepository;
 import com.supportcenter.repository.IssueRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class OperatorServiceImpl implements OperatorService{
@@ -30,11 +28,11 @@ public class OperatorServiceImpl implements OperatorService{
 
 
     @Override
-    public String addCustomerIssue(Issue issue) throws IssueException {
+    public Issue addCustomerIssue(Issue issue) throws IssueException {
         Issue issue1 = issueRepository.save(issue);
 
         if(issue1.getIssueId() != null){
-            return "Issue has been succesfully saved";
+            return issue1;
         }
         else {
             throw new IssueException("Issue could not be saved");
@@ -104,7 +102,8 @@ public class OperatorServiceImpl implements OperatorService{
     }
 
     @Override
-    public boolean lockCustomerWithOperator(Integer customerId, String opoeratorKey) throws CustomerException {
-        return false;
+    public boolean lockCustomerWithOperator(Integer customerId, Integer operatorId) throws CustomerException {
+        
+    	
     }
 }

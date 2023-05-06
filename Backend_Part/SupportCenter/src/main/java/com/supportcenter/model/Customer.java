@@ -1,19 +1,25 @@
 package com.supportcenter.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Data
@@ -55,4 +61,10 @@ public class Customer {
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer")
 	private List<Issue> issues = new ArrayList<>();
+	
+	@Default()
+	private boolean isActive ;
+	
+	@JsonIgnore
+	private List<Integer> operatorIdList;
 }
