@@ -1,15 +1,16 @@
 package com.supportcenter.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.supportcenter.exception.DepartmentException;
 import com.supportcenter.exception.OperatorException;
 import com.supportcenter.model.Department;
 import com.supportcenter.model.Operator;
 import com.supportcenter.repository.DepartmentRepository;
 import com.supportcenter.repository.OperatorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -70,7 +71,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Operator modifyOperator(Operator operator) throws OperatorException {
-        com.supportcenter.model.Operator existingOperator = operatorRepository.findById(operator.getOperatorId())
+        Operator existingOperator = operatorRepository.findById(operator.getOperatorId())
                 .orElseThrow(() -> new OperatorException("Operator not found"));
         existingOperator.setFirstName(operator.getFirstName());
         existingOperator.setLastName(operator.getLastName());
@@ -88,6 +89,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<Operator> findAllOperator() throws OperatorException {
-        return operatorRepository.findAll();
+        List<Operator> operatorList = operatorRepository.findAll();
     }
 }
