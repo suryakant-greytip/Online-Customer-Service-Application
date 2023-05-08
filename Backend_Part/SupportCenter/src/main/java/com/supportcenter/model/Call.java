@@ -2,6 +2,9 @@ package com.supportcenter.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,8 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -29,24 +30,22 @@ public class Call {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer callId;
-	
-	
-	@NotNull(message = "Mandatory field")
-	private String problemDescription;
-	
-	@NotNull(message = "Mandatory field")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private LocalDate callDate;
-	
-	@NotNull(message = "Mandatory field")
-	@Pattern(regexp = "^[0-9]{10}$", message = "Invalid mobile number")
-	private String phoneNumber;
-	
-	@ManyToOne(cascade = CascadeType.ALL , fetch =FetchType.EAGER)
-	@JoinColumn(name="operatorId")
-	private Operator opertor;
-	
-	@OneToOne(mappedBy = "call" , cascade = CascadeType.ALL)
+	private Double duration;
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name= "issue_id")
 	private Issue issue;
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="operator_id")
+	private Operator operator;
+	
+	
 }

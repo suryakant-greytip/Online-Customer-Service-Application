@@ -1,9 +1,5 @@
 package com.supportcenter.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,15 +14,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Login {
 
-	@NotNull
-	private String username;
-	
-	@NotNull
+	@NotNull(message = "email cannot set as null")
+	private String email;
+
+	@NotNull(message = "password cannot set as null")
 	private String password;
+
 	
-	@Enumerated(EnumType.STRING)
-	UserType type;
-	
-	private boolean isActive;
-		
+	private String User_Type;
 }
