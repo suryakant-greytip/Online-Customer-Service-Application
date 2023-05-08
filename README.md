@@ -33,9 +33,13 @@ Online Customer Service Center is a  management system designed to help Customer
 ![image](https://i.ibb.co/26KqWvJ/ER.png)
 
 
-# UI 
+# User Interface 
 
-![image]()
+![image](https://user-images.githubusercontent.com/114465020/236883787-0ea99258-1e28-413a-a1dc-27f4e6b45197.png)
+
+![image](https://user-images.githubusercontent.com/114465020/236883795-6f2f5641-09b0-472a-ac7e-31dda646c880.png)
+
+![image](https://user-images.githubusercontent.com/114465020/236883796-e011ac6a-610b-4876-bd47-f0a37a198fe9.png)
 
 ## Collaborators
 
