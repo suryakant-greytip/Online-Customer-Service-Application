@@ -10,10 +10,9 @@ import com.supportcenter.exception.CustomerException;
 import com.supportcenter.exception.IssueException;
 import com.supportcenter.model.Customer;
 import com.supportcenter.model.Issue;
+import com.supportcenter.model.Status;
 import com.supportcenter.repository.CustomerRepository;
 import com.supportcenter.repository.IssueRepository;
-
-import ch.qos.logback.core.status.Status;
 
 @Service
 public class OperatorServiceImpl implements OperatorService{
@@ -87,6 +86,7 @@ public class OperatorServiceImpl implements OperatorService{
 		if(c != null) return c;
 		else throw new CustomerException("Invalid Email/Could Not find any customer with the provided email.");
 	}
+
 
 //	@Override
 //	public Customer findCustomerByMobile(String mobile) throws CustomerException {

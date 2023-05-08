@@ -4,7 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import ch.qos.logback.core.status.Status;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -51,7 +50,7 @@ public class Issue {
 	
 	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "call_id")
+	@JoinColumn(name = "callID")
 	private Call call;
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
