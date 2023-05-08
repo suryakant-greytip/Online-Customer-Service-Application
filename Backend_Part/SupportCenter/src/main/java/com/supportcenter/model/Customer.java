@@ -30,6 +30,11 @@ import lombok.Setter;
 @Setter
 public class Customer {
 
+	private static boolean $default$isActive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId;

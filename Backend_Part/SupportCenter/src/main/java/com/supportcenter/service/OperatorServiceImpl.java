@@ -101,9 +101,10 @@ public class OperatorServiceImpl implements OperatorService{
         return customer;
     }
 
-    @Override
-    public boolean lockCustomerWithOperator(Integer customerId, Integer operatorId) throws CustomerException {
-        
-    	
-    }
+    
+	@Override
+	public boolean lockCustomerWithOperator(Integer customerId, String operatorKey) throws CustomerException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
