@@ -87,13 +87,6 @@ https://localhost:8080/
 http://localhost:8080/swagger-ui/index.html
 ```
 
-## Collaborators
-
-- [Naveen Sharma](https://github.com/naveensharma8527) (Team Lead)
-- [Priyanshu](https://github.com/Siddharth263) 
-- [Narendra Swami](https://github.com/NarendraKumarSwami) 
-- [Gitesh Sutar](https://github.com/gitesh8) 
-- [Shubham Dubey](https://github.com/)
 
 
 

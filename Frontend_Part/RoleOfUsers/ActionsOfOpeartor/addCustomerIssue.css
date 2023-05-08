@@ -156,6 +156,28 @@ body{
   }
 
 
+  #resultant_data{
+    background: white;
+    width: auto;
+    height: auto;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+
+  #resultant_data div{
+     margin: 30px;
+     color: #000000;
+  }
+
+  #resultant_data h1{
+    color: black;
+    margin: auto;
+  }
+
+
   
 
 
