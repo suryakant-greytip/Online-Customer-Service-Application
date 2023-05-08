@@ -10,10 +10,9 @@ import com.supportcenter.exception.CustomerException;
 import com.supportcenter.exception.IssueException;
 import com.supportcenter.model.Customer;
 import com.supportcenter.model.Issue;
+import com.supportcenter.model.Status;
 import com.supportcenter.repository.CustomerRepository;
 import com.supportcenter.repository.IssueRepository;
-
-import ch.qos.logback.core.status.Status;
 
 @Service
 public class OperatorServiceImpl implements OperatorService{
@@ -21,9 +20,11 @@ public class OperatorServiceImpl implements OperatorService{
 	@Autowired
 	private CustomerRepository cR;
 	
+	
 	@Autowired
 	private IssueRepository iR;
 
+	
 	@Override
 	public String AddCustomerIssue(Issue issue) throws IssueException {
 		String s = "Issue could not be saved, because of wrong Input Format!. Please try again later";
@@ -33,6 +34,7 @@ public class OperatorServiceImpl implements OperatorService{
 		else throw new IssueException(s);
 	}
 
+	
 	@Override
 	public String modifyIssue(Issue issue) throws IssueException {
 		String message = "Issue could not be saved, because of wrong Input Format!. Please try again later";
@@ -45,18 +47,6 @@ public class OperatorServiceImpl implements OperatorService{
 			i1 = issue;
 			iR.save(i1);
 			return "Issue has been updated";
-		} else throw new IssueException(message);
-	}
-
-	@Override
-	public String closeCustomerIssue(Integer IssueId, Status status) throws IssueException {
-		String message = "Invalid Issue ID";
-		Optional<Issue> i = iR.findById(IssueId);
-		if(i.get().getIssueId() != null) {
-			Issue issue = i.get();
-			issue.setStatus(status);
-			iR.save(issue);
-			return "Issue with id: " + IssueId + " has been sussuccessfully closed";
 		} else throw new IssueException(message);
 	}
 
@@ -87,6 +77,19 @@ public class OperatorServiceImpl implements OperatorService{
 		if(c != null) return c;
 		else throw new CustomerException("Invalid Email/Could Not find any customer with the provided email.");
 	}
+
+	@Override
+	public String closeCustomerIssue(Integer IssueId, Status status) throws IssueException {
+		String message = "Invalid Issue ID";
+		Optional<Issue> i = iR.findById(IssueId);
+		if(i.get().getIssueId() != null) {
+			Issue issue = i.get();
+			issue.setStatus(com.supportcenter.model.Status.CLOSED);
+			iR.save(issue);
+			return "Issue with id: " + IssueId + " has been sussuccessfully closed";
+		} else throw new IssueException(message);
+	}
+
 
 //	@Override
 //	public Customer findCustomerByMobile(String mobile) throws CustomerException {
