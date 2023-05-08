@@ -90,7 +90,6 @@ public class OperatorServiceImpl implements OperatorService{
 		} else throw new IssueException(message);
 	}
 
-
 //	@Override
 //	public Customer findCustomerByMobile(String mobile) throws CustomerException {
 //		Customer c = cR.findCustomerByMobile(mobile);
