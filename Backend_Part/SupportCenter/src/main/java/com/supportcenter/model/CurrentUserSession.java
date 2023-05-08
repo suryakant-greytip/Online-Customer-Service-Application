@@ -29,6 +29,6 @@ public class CurrentUserSession {
 	
 	private LocalDateTime timestamp;
 	
-	private String User_Type;
+//	private String User_Type;
 	
 }

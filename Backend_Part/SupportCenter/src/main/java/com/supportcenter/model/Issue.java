@@ -20,6 +20,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,7 +47,7 @@ public class Issue {
 	
 	
 	@Enumerated(EnumType.STRING)
-	private Status status;
+	private Status status = Status.OPEN;
 	
 	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

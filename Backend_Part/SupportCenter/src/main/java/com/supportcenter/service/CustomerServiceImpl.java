@@ -9,7 +9,7 @@ import com.supportcenter.exception.CustomerException;
 import com.supportcenter.model.CurrentUserSession;
 import com.supportcenter.model.Customer;
 import com.supportcenter.model.Issue;
-import com.supportcenter.model.Login;
+import com.supportcenter.model.LoginDTO;
 import com.supportcenter.model.Status;
 import com.supportcenter.repository.CurrentUserSessionRepository;
 import com.supportcenter.repository.CustomerRepository;
@@ -30,21 +30,27 @@ public class CustomerServiceImpl implements CustomerService{
 	private IssueRepository issueRepo;
 
 	@Override
-	public Customer registerCustomer(Customer customer) {
+	public Customer registerCustomer(Customer customer) throws CustomerException {
 		
-		List<Issue> issue = customer.getIssue();
 		
-		for(Issue i:issue) {
-			i.setCustomer(customer);
+		Customer existingCustomer= cr.findCustomerByMobile(customer.getMobile());
+		
+		
+		
+		if(existingCustomer != null) 
+			throw new CustomerException("Customer Already Registered with Mobile number");
+			
+		
+		
+		
+			return cr.save(customer);
+			
+			
 		}
-		System.out.println("Your Id is" + customer.getCustomerId());
-		return cr.save(customer);
-	}
-
 	@Override
-	public String changePassword(Login login) throws CustomerException {
+	public String changePassword(LoginDTO login) throws CustomerException {
 		
-		Customer c = cr.findByEmail(login.getEmail());
+		Customer c = cr.findByEmail(login.getMobileNo());
 		
 		if(c==null) {
 			throw new CustomerException("Invalid Credentials");

@@ -11,3 +11,12 @@ public class SupportCenterApplication {
 	}
 
 }
+//
+//{
+//    "firstName": "Demo3",
+//    "lastName": "Lastname3",
+//    "email": "demo3@gmail.com",
+//    "mobile": "2314574523",
+//    "password": "12348",
+//    "city": "BGp3"
+//}

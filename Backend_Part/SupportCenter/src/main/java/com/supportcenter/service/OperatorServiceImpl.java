@@ -77,7 +77,7 @@ public class OperatorServiceImpl implements OperatorService{
 	public List<Customer> findCustomerByFirstName(String name) throws CustomerException {
 		List<Customer> list = cR.findCustomerByFirstName(name);
 		if(list != null) return list;
-		else throw new CustomerException("Invalid Name/Could Not find any customer with the provided first name.");
+		else throw new CustomerException("Could Not find any customer with the provided first name.");
 	}
 
 	@Override
