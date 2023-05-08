@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.supportcenter.exception.CustomerException;
 import com.supportcenter.model.Customer;
 import com.supportcenter.model.Issue;
-import com.supportcenter.model.Login;
+import com.supportcenter.model.LoginDTO;
 import com.supportcenter.service.CustomerService;
 
 @RestController
@@ -27,13 +27,13 @@ public class CustomeController {
 	private CustomerService cs;
    
 	@PostMapping("/register")
-	public ResponseEntity<Customer> register(@RequestBody Customer c){
+	public ResponseEntity<Customer> register(@RequestBody Customer c) throws CustomerException{
 		Customer customer = cs.registerCustomer(c);
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
 	
 	@PutMapping("/changePassword")
-	public ResponseEntity<String> register(@RequestBody Login l) throws CustomerException{
+	public ResponseEntity<String> register(@RequestBody LoginDTO l) throws CustomerException{
 		String login = cs.changePassword(l);
 		return new ResponseEntity<String>(login,HttpStatus.OK);
 	}

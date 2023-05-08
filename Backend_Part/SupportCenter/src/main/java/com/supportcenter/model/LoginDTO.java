@@ -8,18 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class Login {
+public class LoginDTO {
 
-	@NotNull(message = "email cannot set as null")
-	private String email;
-
-	@NotNull(message = "password cannot set as null")
+	private String mobileNo;
 	private String password;
-
+	//private String role;
 	
-	private String User_Type;
 }

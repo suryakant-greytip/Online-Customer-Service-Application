@@ -21,7 +21,7 @@ import com.supportcenter.service.OperatorService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("\"/operators\"")
+@RequestMapping("/operators")
 public class OperatorController {
 	
 	@Autowired
@@ -42,8 +42,8 @@ public class OperatorController {
 	}
 	
 	@PostMapping("/closeIssue/{issueid}")
-	public ResponseEntity<String> closeIssueHandler(@PathVariable @Valid Integer issueid, @RequestBody @Valid Status status) throws IssueException {
-		String s = oS.closeCustomerIssue(issueid, status);
+	public ResponseEntity<String> closeIssueHandler(@PathVariable @Valid Integer issueid) throws IssueException {
+		String s = oS.closeCustomerIssue(issueid, Status.CLOSED);
 		return ResponseEntity.ok(s);
 	}
 	
@@ -54,19 +54,19 @@ public class OperatorController {
 		return ResponseEntity.ok(list);
 	}
 	
-	@GetMapping("/customers/{customerId}")
+	@GetMapping("/customersid/{customerId}")
 	public ResponseEntity<Customer> getCustomerByIdHandler(@PathVariable @Valid Integer customerId) throws CustomerException {
 		Customer c = oS.findByCustomerId(customerId);
 		return ResponseEntity.ok(c);
 	}
 	
-	@GetMapping("/customers/{firstName}")
+	@GetMapping("/customersname/{firstName}")
 	public ResponseEntity<List<Customer>> getByFirstNameHandler(@PathVariable @Valid String firstName) throws CustomerException {
 		List<Customer> c = oS.findCustomerByFirstName(firstName);
 		return ResponseEntity.ok(c);
 	}
 	
-	@GetMapping("/customer/{email}")
+	@GetMapping("/customersemail/{email}")
 	public ResponseEntity<Customer> getByEmailHandler(@PathVariable @Valid String email) throws CustomerException {
 		Customer c = oS.findCustomerByEmail(email);
 		return ResponseEntity.ok(c);

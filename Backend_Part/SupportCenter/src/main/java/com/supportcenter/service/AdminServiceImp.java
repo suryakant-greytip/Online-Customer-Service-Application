@@ -38,12 +38,11 @@ public class AdminServiceImp implements AdminService{
 
 	@Override
 	public Department addDepartment(Department d, String key) throws LoginException {
-		
+		Department d1 = deptDao.save(d);
 		// Verifying login with given key 
-		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
-			Department d1 = deptDao.save(d);
-			
+//		CurrentUserSession cs =   cDao.findByUuid(key);
+		if(d1 != null ) {
+
 			return d1;
 		}else {
 			 throw new LoginException("You are not authorized to add department");
@@ -57,7 +56,7 @@ public class AdminServiceImp implements AdminService{
 		           
 		       // verifying login with given key 
 		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
+		if(cs != null ) {
 					Department d1 = deptDao.findById(d.getDeptId()).orElseThrow(() -> new DepartmentException("There is not deparmtent with id "+d.getDeptId()));
 					  d1.setDeptName(d.getDeptName());
 					  d1.getOperators().addAll(d.getOperators());
@@ -71,7 +70,7 @@ public class AdminServiceImp implements AdminService{
 	public Department removeDepartment(Integer id, String key) throws DepartmentException, LoginException {
 		   // verifying login with given key 
 		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
+		if(cs != null) {
 			Department d1 = deptDao.findById(id).orElseThrow(() -> new DepartmentException("There is not deparmtent with id "+id));
 			 
 			 deptDao.delete(d1);
@@ -85,7 +84,7 @@ public class AdminServiceImp implements AdminService{
 	public Department getDepartmentById(Integer id, String key) throws DepartmentException, LoginException {
 		   // verifying login with given key 
 		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
+		if(cs != null) {
 				Department d1 = deptDao.findById(id).orElseThrow(() -> new DepartmentException("There is not deparmtent with id "+id));
 				 
 				 return d1;
@@ -98,7 +97,7 @@ public class AdminServiceImp implements AdminService{
 	public Operator addOperator(Operator o, String key) throws LoginException {
 		   // verifying login with given key 
 		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
+		if(cs != null) {
 						  return optDao.save(o);
 						 
 						 
@@ -111,7 +110,7 @@ public class AdminServiceImp implements AdminService{
 	public OperatorDTO assignDeptToOperator(Integer oid, Integer did, String key)
 			throws DepartmentException, OperatorException, LoginException {
 		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
+		if(cs != null) {
 		
 			//find the department 
 		      Department dept =	    deptDao.findById(did).orElseThrow(() -> new DepartmentException("There is no department with this id "+did));
@@ -133,7 +132,7 @@ public class AdminServiceImp implements AdminService{
 	public Operator modifyOperator(Operator o, String key) throws OperatorException, LoginException {
 		 // verifying login with given key 
 		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
+		if(cs != null) {
 			  Operator opt =      optDao.findById(o.getOperatorId()).orElseThrow(() -> new OperatorException("There is no operator associated with thid operatorId "+o.getOperatorId()));
 			  
 			  // update the first name 
@@ -186,7 +185,7 @@ public class AdminServiceImp implements AdminService{
 	public Operator deleteOperator(Integer id, String key) throws OperatorException, LoginException {
 		// verify login with given key 
 		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
+		if(cs != null) {
 			Operator opt =     optDao.findById(id).orElseThrow(() -> new OperatorException("There is no operator with this id "+ id));
 			 
 			
@@ -204,7 +203,7 @@ public class AdminServiceImp implements AdminService{
 	public List<Operator> getAllOperators(String key) throws LoginException {
 		// verify login with given key 
 		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
+		if(cs != null) {
 			  
 		   return	optDao.findAll();
 			 
@@ -217,7 +216,7 @@ public class AdminServiceImp implements AdminService{
 	public Operator getOperatorById(Integer id, String key) throws OperatorException, LoginException {
 		 // verify login with given key 
 		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
+		if(cs != null) {
 			  
 		  return optDao.findById(id).orElseThrow(() -> new OperatorException("There is no operator with this id "+ id));
 			 
@@ -232,7 +231,7 @@ public class AdminServiceImp implements AdminService{
 	public List<Operator> getAllOperatorWithDeptId(Integer id, String key) throws DepartmentException, LoginException {
 		 // verify login with given key 
 		CurrentUserSession cs =   cDao.findByUuid(key);
-		if(cs != null && cs.getUser_Type().equalsIgnoreCase("Admin")) {
+		if(cs != null) {
 			
 		   Department dept =	  deptDao.findById(id).orElseThrow(() -> new DepartmentException("There is no department with this id "+ id));
 			 
