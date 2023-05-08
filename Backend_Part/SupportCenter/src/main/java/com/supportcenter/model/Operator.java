@@ -1,21 +1,31 @@
 package com.supportcenter.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import jakarta.validation.Valid;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
 
 @Data
 @Entity
@@ -30,43 +40,36 @@ public class Operator {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer operatorId;
 	
-	@NotNull(message = "Mandatory field")
-	 private String firstName;
+	@NotBlank(message = "First Name cannot be Blank")
+	@NotEmpty(message = "First Name cannot be Empty")
+	@NotNull(message = "First Name cannot be Null")
+	private String firstName;
 	
-	 private String  lastName;
-	 
-	 @Email(message = "Mandatory field")
-	 private String  email;
-	 
-	 @Pattern(regexp = "^[0-9]{10}$", message = "Invalid mobile number")
-	 private String  mobile;
-	 
-	 
-	 @NotNull
-	 (message = "Mandatory field")
-	 private String city;
-
-	 
-
+	@NotBlank(message = "Last Name cannot be Blank")
+	@NotEmpty(message = "Last Name cannot be Empty")
+	@NotNull(message = "Last Name cannot be Null")
+	private String lastName;
+	
+	@Email
+	@Column(unique = true)
+	private String email;
+	
+	private String password;
+	
+	@Column(unique = true)
+	private String mobile;
+	
+	private String city;
+	
+	
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "operator")
+	private List<Call> call=new ArrayList<>();
+	
+	
 	@JsonIgnore
-	@OneToMany(mappedBy = "operator")
-	private List<Call> calls = new ArrayList<>();
-
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "operator")
-	private List<Solution> solutions = new ArrayList<>();
-
-
-	@ManyToOne
-	@JoinColumn(name = "departmentId")
-	@Valid
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="dept_id")
 	private Department department;
+
 	
-	
-	
-	
-//	operator has Customer list
-//    @JsonIgnore
-//	private List<Customer> blockedCustomerList;
 }

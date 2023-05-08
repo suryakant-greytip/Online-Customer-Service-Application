@@ -1,32 +1,31 @@
 package com.supportcenter.service;
 
-import com.supportcenter.exception.CallException;
+import java.util.List;
+
 import com.supportcenter.exception.CustomerException;
 import com.supportcenter.exception.IssueException;
-import com.supportcenter.exception.LogInException;
 import com.supportcenter.model.Customer;
 import com.supportcenter.model.Issue;
 
-import java.util.List;
+import ch.qos.logback.core.status.Status;
 
 public interface OperatorService {
 
-    public Issue addCustomerIssue(Issue issue) throws IssueException;
+public String AddCustomerIssue(Issue issue) throws IssueException;
+	
+	public String modifyIssue(Issue issue) throws IssueException;
+	
+	public String closeCustomerIssue(Integer IssueId, Status status) throws IssueException;
+	
+	public List<Customer> findAllCustomer() throws CustomerException;
+	
+	public Customer findByCustomerId(Integer cusId) throws CustomerException;
+	
+	public List<Customer> findCustomerByFirstName(String name) throws CustomerException;
+	
+	public Customer findCustomerByEmail(String email) throws CustomerException;
+	
+//	public Customer findCustomerByMobile(String mobile) throws CustomerException;
 
-    public String sendIntimationEmailToCustomer(Integer customerId) throws CustomerException;
-
-    public Issue modifyCustomerIssue(Issue issue) throws IssueException;
-
-    public String sendModificationEmailToCustomer(Integer customerId) throws CustomerException;
-
-    public Issue closeCustomerIssue(Issue issue) throws IssueException;
-
-    public Customer findCustomerById(Integer customerId) throws CustomerException;
-
-    public List<Customer> findCustomerByName(String customerName) throws CustomerException;
-
-    public Customer findCustomerByEmail(String email) throws CustomerException;
-
-    public boolean lockCustomerWithOperator(Integer customerId, String operatorKey) throws CustomerException;
 
 }

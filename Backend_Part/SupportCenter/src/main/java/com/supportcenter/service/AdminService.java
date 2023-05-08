@@ -1,33 +1,27 @@
 package com.supportcenter.service;
 
 
+import java.util.List;
+
+import javax.security.auth.login.LoginException;
+
+import com.supportcenter.DTO.OperatorDTO;
 import com.supportcenter.exception.DepartmentException;
 import com.supportcenter.exception.OperatorException;
 import com.supportcenter.model.Department;
 import com.supportcenter.model.Operator;
 
-import jakarta.validation.Valid;
-
-import java.util.List;
-
 public interface AdminService {
-    public Department addDepartment(Department department)throws DepartmentException;
-
-    public Department removeDepartment(Integer departmentId)throws DepartmentException;
-
-    public Department modifyDepartment(Department department)throws DepartmentException;
-
-    public Department findDepartmentById(int id)throws DepartmentException;
-
-
-    public Operator addOperator(Integer departmentID,  Operator operator)throws OperatorException;
-
-    public Operator removeOperator(Integer operatorId) throws OperatorException;
-
-    public Operator modifyOperator(Operator operator)throws OperatorException;
-
-    public Operator findOperatorbyId(Integer operatorId)throws OperatorException;
-
-    public List<Operator> findAllOperator() throws OperatorException;
+	public Department addDepartment(Department d,String key) throws LoginException;
+	public Department modifyDepartment(Department d,String key) throws DepartmentException,LoginException;
+	public Department removeDepartment(Integer id,String key) throws DepartmentException,LoginException;
+	public Department getDepartmentById(Integer id,String key) throws DepartmentException,LoginException;
+	public Operator addOperator(Operator o,String key)throws LoginException;
+	public OperatorDTO assignDeptToOperator(Integer oid,Integer did,String key) throws DepartmentException, OperatorException,LoginException;
+	public Operator modifyOperator(Operator o,String key) throws OperatorException,LoginException;
+	public Operator deleteOperator(Integer id,String key)throws OperatorException,LoginException;
+	public List<Operator> getAllOperators(String key)throws LoginException;
+	public Operator getOperatorById(Integer id,String key) throws OperatorException,LoginException;
+	public List<Operator> getAllOperatorWithDeptId(Integer id,String key) throws DepartmentException,LoginException;
 
 }

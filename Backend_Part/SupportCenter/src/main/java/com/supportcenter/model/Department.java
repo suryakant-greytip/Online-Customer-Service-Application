@@ -1,5 +1,6 @@
 package com.supportcenter.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -24,17 +25,16 @@ import lombok.Setter;
 @Setter
 public class Department {
 
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer departmentId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer deptId;
 	
 	
-	@NotNull(message = "Mandatory field")
-	private String  departmentName;
+	@NotNull(message="department name cannot be null")
+	private String deptName;
 	
 	
-	@OneToMany(mappedBy="department")
-	private List<Operator> operatorList;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "department")
+	private List<Operator>operators=new ArrayList<>();
 	
 }
