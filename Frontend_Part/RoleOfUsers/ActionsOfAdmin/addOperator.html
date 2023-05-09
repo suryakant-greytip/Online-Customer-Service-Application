@@ -48,10 +48,106 @@
                 <input id="mobile" type="number" placeholder="Enter Mobile Number" >
                 <label for="city">City<span>*</span> :</label>
                 <input id="city" type="text" placeholder="Enter City" >
+                <label for="password">Password<span>*</span> :</label>
+                <input id="password" type="password" placeholder="Enter Password" >
             </form>
-            <a href="#"><button>Add</button></a>
+            <a href="#"><button id="add">Add</button></a>
         </div>
+    </div>
+    <div id="resultant_data">
+
     </div>
 
 </body>
+<script>
+   
+    // document.getElementById("find").addEventListener("click",function(event){ 
+    //     let custId=+document.getElementById("custId").value;
+    //     console.log(custId);
+    // })
+    
+    
+    let add=document.getElementById("add");
+    add.addEventListener("click",function(event){
+        event.preventDefault();
+        let firstName=document.getElementById("fName").value;
+        let lastName=document.getElementById("lName").value;
+        let email=document.getElementById("email").value;
+        let mobile=document.getElementById("mobile").value;
+        let city=document.getElementById("city").value;
+        let password=document.getElementById("password").value;
+
+        
+        let dataObj={
+            firstName,  
+            lastName,
+            email,
+            mobile,
+            city,
+            password      
+        };
+
+    if(firstName!="" && lastName!="" && email!="" && mobile!="" && city!="" && password!=""){
+        fetch(`http://localhost:8080/operator/add`,{
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataObj)
+        })
+        .then(response => response.json())
+        .then(data=>{
+         console.log(data);
+         if(data.operatorId===undefined){
+                errorMessage(data);
+            }
+            else{
+                renderCards(data);
+            }
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    else{
+       alert("Input boxes are mandatory")
+    }
+    });
+
+    function renderCards(data){
+        let res_div=document.getElementById("resultant_data");
+        res_div.innerHTML="";
+        res_div.innerHTML+=`
+        <h1>Output :-</h1>
+        `
+        res_div.innerHTML+=`
+              <div class="card">
+                <h3>OperatorId : ${data.operatorId}</h3>
+                <h3>OperatorName : ${data.firstName +" "+data.lastName}</h3>
+                <h3>OperatorEmail : ${data.email}</h3>
+                <h3>OperatorMobile : ${data.mobile}</h3>
+                <h3>OperatorCity : ${data.city}</h3>
+              </div>  
+            `
+    };
+
+    function errorMessage(data){
+        console.log(data);
+        let res_div=document.getElementById("resultant_data");
+        res_div.innerHTML="";
+        res_div.innerHTML+=`
+        <h1>Output :-</h1>
+        `
+
+        res_div.innerHTML+=`
+              <div class="card">
+                <h3>timestamp : ${data.timestamp}</h3>
+                <h3>details : ${data.details}</h3>
+                <h3>message : ${data.message}</h3>
+              </div>  
+            `
+    };
+
+    
+</script>
 </html>

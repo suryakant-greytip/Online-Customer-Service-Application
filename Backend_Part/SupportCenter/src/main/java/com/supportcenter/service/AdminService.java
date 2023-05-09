@@ -20,7 +20,7 @@ public interface AdminService {
 	public OperatorDTO assignDeptToOperator(Integer oid,Integer did) throws DepartmentException, OperatorException,LoginException;
 	public Operator modifyOperator(Operator o,Integer operatorId) throws OperatorException,LoginException;
 	public Operator deleteOperator(Integer id)throws OperatorException,LoginException;
-	public List<Operator> getAllOperators(String key)throws LoginException;
+	public List<Operator> getAllOperators()throws LoginException;
 	public Operator getOperatorById(Integer id) throws OperatorException,LoginException;
 	public List<Operator> getAllOperatorWithDeptId(Integer id) throws DepartmentException,LoginException;
 

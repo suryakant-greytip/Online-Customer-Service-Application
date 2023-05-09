@@ -41,12 +41,8 @@ public class AdminServiceImp implements AdminService{
 		// Verifying login with given key 
 //		CurrentUserSession cs =   cDao.findByUuid(key);
 		Department d1 = deptDao.save(d);
-		if(d1 != null ) {
-
-			return d1;
-		}else {
-			 throw new LoginException("You are not authorized to add department");
-		}
+		System.out.println(d1);
+		return d1;
 		
 		
 	}
@@ -196,7 +192,7 @@ public class AdminServiceImp implements AdminService{
 	}
 
 	@Override
-	public List<Operator> getAllOperators(String key) throws LoginException {
+	public List<Operator> getAllOperators() throws LoginException {
 		// verify login with given key 
 //		CurrentUserSession cs =   cDao.findByUuid(key);
 //		if(cs != null) {

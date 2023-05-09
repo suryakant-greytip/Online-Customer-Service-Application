@@ -41,9 +41,83 @@
                 <label for="optId">Operator Id<span>*</span> :</label>
                 <input id="optId" type="text" placeholder="Enter Operator Id" >
             </form>
-            <a href="#"><button>Find</button></a>
+            <a href="#"><button id="find">Find</button></a>
         </div>
+    </div>
+    <div id="resultant_data">
+
     </div>
 
 </body>
+<script>
+   
+    // document.getElementById("find").addEventListener("click",function(event){ 
+    //     let custId=+document.getElementById("custId").value;
+    //     console.log(custId);
+    // })
+    
+    
+    let find=document.getElementById("find");
+    find.addEventListener("click",function(event){
+        event.preventDefault();
+        let optId=+document.getElementById("optId").value;
+
+
+    if(optId!==0){
+        fetch(`http://localhost:8080/operator/get/${optId}`)
+        .then(response => response.json())
+        .then(data=>{
+         console.log(data);
+         if(data.operatorId===undefined){
+                errorMessage(data);
+            }
+            else{
+                renderCards(data);
+            }
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    else{
+       alert("Input boxes are mandatory")
+    }
+    });
+
+    function renderCards(data){
+        let res_div=document.getElementById("resultant_data");
+        res_div.innerHTML="";
+        res_div.innerHTML+=`
+        <h1>Output :-</h1>
+        `
+        res_div.innerHTML+=`
+              <div class="card">
+                <h3>OperatorId : ${data.operatorId}</h3>
+                <h3>OperatorName : ${data.firstName +" "+data.lastName}</h3>
+                <h3>OperatorEmail : ${data.email}</h3>
+                <h3>OperatorMobile : ${data.mobile}</h3>
+                <h3>OperatorCity : ${data.city}</h3>
+              </div>  
+            `
+    };
+
+    function errorMessage(data){
+        console.log(data);
+        let res_div=document.getElementById("resultant_data");
+        res_div.innerHTML="";
+        res_div.innerHTML+=`
+        <h1>Output :-</h1>
+        `
+
+        res_div.innerHTML+=`
+              <div class="card">
+                <h3>timestamp : ${data.timestamp}</h3>
+                <h3>details : ${data.details}</h3>
+                <h3>message : ${data.message}</h3>
+              </div>  
+            `
+    };
+
+    
+</script>
 </html>
