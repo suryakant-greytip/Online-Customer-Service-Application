@@ -38,70 +38,69 @@ public class AdminController {
 	
 	@PostMapping("/depart/add")
 	public ResponseEntity<Department>  addDepartment(@Valid @RequestBody Department deprt) throws LoginException{
-		  System.out.println(deprt);
-		  
 		  
 		return new ResponseEntity<>(adminService.addDepartment(deprt, "ADMIN"), HttpStatus.CREATED);
+		  return new ResponseEntity<>(adminService.addDepartment(deprt), HttpStatus.CREATED);
 	}
 	
-	@PutMapping("depart/update/{key}")
-	public ResponseEntity<Department>  modifyDepartment(@Valid @RequestBody Department deprt, @PathVariable String key) throws LoginException, DepartmentException{
+	@PutMapping("depart/update/{deptId}")
+	public ResponseEntity<Department>  modifyDepartment(@Valid @RequestBody Department deprt, @PathVariable Integer deptId) throws LoginException, DepartmentException{
 		
-		  return new ResponseEntity<>(adminService.modifyDepartment(deprt, key), HttpStatus.CREATED);
+		  return new ResponseEntity<>(adminService.modifyDepartment(deprt,deptId), HttpStatus.CREATED);
 	}
 	
 	
-	@DeleteMapping("/depart/delete/{deptId}/{key}")
-	private ResponseEntity<Department> deleteDepartment(@PathVariable Integer deptId, @PathVariable String key) throws LoginException, DepartmentException {
+	@DeleteMapping("/depart/delete/{deptId}")
+	private ResponseEntity<Department> deleteDepartment(@PathVariable Integer deptId) throws LoginException, DepartmentException {
 		 
-		return new ResponseEntity<Department>(adminService.removeDepartment(deptId, key), HttpStatus.ACCEPTED);
+		return new ResponseEntity<Department>(adminService.removeDepartment(deptId), HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("depart/get/{deptId}")
-	public ResponseEntity<Department> getDepartmentById(@PathVariable Integer deptId, @PathVariable String key) throws LoginException, DepartmentException{
+	public ResponseEntity<Department> getDepartmentById(@PathVariable Integer deptId) throws LoginException, DepartmentException{
 		    
-	   return new ResponseEntity<Department>(adminService.getDepartmentById(deptId, key), HttpStatus.ACCEPTED);
+	   return new ResponseEntity<Department>(adminService.getDepartmentById(deptId), HttpStatus.ACCEPTED);
 		
 	}
 	
 	
-	@PostMapping("operator/add/{key}")
-	public ResponseEntity<Operator>  addOPerator(@Valid @RequestBody Operator opt, @PathVariable String key) throws LoginException{
+	@PostMapping("operator/add")
+	public ResponseEntity<Operator>  addOPerator(@Valid @RequestBody Operator opt) throws LoginException{
 		     
-         return new ResponseEntity<Operator>(adminService.addOperator(opt, key), HttpStatus.ACCEPTED);
+         return new ResponseEntity<Operator>(adminService.addOperator(opt), HttpStatus.ACCEPTED);
 		 
 	}
 	
-	@PutMapping("operator/update/{key}")
-	public ResponseEntity<Operator>   modifyOperator(@Valid @RequestBody Operator opt, @PathVariable String key) throws LoginException, OperatorException{
+	@PutMapping("operator/update/{operatorId}")
+	public ResponseEntity<Operator>   modifyOperator(@Valid @RequestBody Operator opt,@PathVariable Integer operatorId) throws LoginException, OperatorException{
 		   
-		return new ResponseEntity<Operator>(adminService.modifyOperator(opt, key), HttpStatus.ACCEPTED);
+		return new ResponseEntity<Operator>(adminService.modifyOperator(opt,operatorId), HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("operator/delete/{key}")
-	public ResponseEntity<Operator> deleteOperator(@RequestBody Integer optId, @PathVariable String key) throws LoginException, OperatorException{
-		   return new ResponseEntity<Operator>(adminService.deleteOperator(optId, key), HttpStatus.ACCEPTED);
+	@DeleteMapping("operator/delete")
+	public ResponseEntity<Operator> deleteOperator(@RequestBody Integer optId) throws LoginException, OperatorException{
+		   return new ResponseEntity<Operator>(adminService.deleteOperator(optId), HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("operator/all/{key}")
+	@GetMapping("operator/all")
 	public ResponseEntity<List<Operator>> getAllOperator(@PathVariable String key) throws LoginException{
 		    return new ResponseEntity<List<Operator>>(adminService.getAllOperators(key), HttpStatus.OK);
 	}
 	
 	
-	@GetMapping("operator/get/{id}/{key}")
-	public ResponseEntity<Operator> getOperatorById(@PathVariable Integer id, @PathVariable String key) throws LoginException, OperatorException{
-		   return new ResponseEntity<Operator>(adminService.getOperatorById(id, key), HttpStatus.OK);
+	@GetMapping("operator/get/{id}")
+	public ResponseEntity<Operator> getOperatorById(@PathVariable Integer id) throws LoginException, OperatorException{
+		   return new ResponseEntity<Operator>(adminService.getOperatorById(id), HttpStatus.OK);
 	}
 	
-	@GetMapping("operator/getdept/{id}/{key}")
-	public ResponseEntity<List<Operator>> getAllOperatorByDeptId(@PathVariable Integer id, @PathVariable String key) throws LoginException, DepartmentException{
-		   return new ResponseEntity<List<Operator>>(adminService.getAllOperatorWithDeptId(id, key), HttpStatus.OK);
+	@GetMapping("operator/getdept/{id}")
+	public ResponseEntity<List<Operator>> getAllOperatorByDeptId(@PathVariable Integer id) throws LoginException, DepartmentException{
+		   return new ResponseEntity<List<Operator>>(adminService.getAllOperatorWithDeptId(id), HttpStatus.OK);
 	}
 	
-	@PostMapping("operator/assign/{key}")
-	private ResponseEntity<OperatorDTO> assignDepartmentToOperator(@Valid @RequestBody OperatorDTO optDto, @PathVariable String key) throws LoginException, DepartmentException, OperatorException{
-		  return new ResponseEntity<OperatorDTO>(adminService.assignDeptToOperator(optDto.getId(),optDto.getDept_id(), key), HttpStatus.OK);
+	@PostMapping("operator/assign")
+	private ResponseEntity<OperatorDTO> assignDepartmentToOperator(@Valid @RequestBody OperatorDTO optDto) throws LoginException, DepartmentException, OperatorException{
+		  return new ResponseEntity<OperatorDTO>(adminService.assignDeptToOperator(optDto.getId(),optDto.getDept_id()), HttpStatus.OK);
 	}
 	
 	
