@@ -28,6 +28,7 @@ public class CustomeController {
    
 	@PostMapping("/register")
 	public ResponseEntity<Customer> register(@RequestBody Customer c) throws CustomerException{
+		
 		Customer customer = cs.registerCustomer(c);
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
@@ -69,9 +70,6 @@ public class CustomeController {
 		return new ResponseEntity<String>(message,HttpStatus.OK);
 	}
 	
-	
-	
-
 }
 
 

@@ -41,9 +41,85 @@
                 <label for="deptId">Department Id<span>*</span> :</label>
                 <input id="deptId" type="text" placeholder="Enter Department Id" >
             </form>
-            <a href="#"><button>Remove</button></a>
+            <a href="#"><button id="remove">Remove</button></a>
         </div>
+    </div>
+    <div id="resultant_data">
+
     </div>
 
 </body>
+<script>
+   
+    // document.getElementById("find").addEventListener("click",function(event){ 
+    //     let custId=+document.getElementById("custId").value;
+    //     console.log(custId);
+    // })
+    
+    
+    let add=document.getElementById("remove");
+    add.addEventListener("click",function(event){
+        event.preventDefault();
+        let deptId=+document.getElementById("deptId").value;
+
+
+    if(deptId!==0){
+        fetch(`http://localhost:8080/depart/delete/${deptId}/${"ADMIN"}`,{
+            method:'DELETE',
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data=>{
+         console.log(data);
+         if(data.deptId===undefined){
+                errorMessage(data);
+            }
+            else{
+                renderCards(data);
+            }
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    else{
+       alert("Input boxes are mandatory")
+    }
+    });
+
+    function renderCards(data){
+        let res_div=document.getElementById("resultant_data");
+        res_div.innerHTML="";
+        res_div.innerHTML+=`
+        <h1>Output :-</h1>
+        `
+        res_div.innerHTML+=`
+              <div class="card">
+                <h3>CustomerId : ${data.deptId}</h3>
+                <h3>CustomerName : ${data.deptName}</h3>
+              </div>  
+            `
+    };
+
+    function errorMessage(data){
+        console.log(data);
+        let res_div=document.getElementById("resultant_data");
+        res_div.innerHTML="";
+        res_div.innerHTML+=`
+        <h1>Output :-</h1>
+        `
+
+        res_div.innerHTML+=`
+              <div class="card">
+                <h3>timestamp : ${data.timestamp}</h3>
+                <h3>details : ${data.details}</h3>
+                <h3>message : ${data.message}</h3>
+              </div>  
+            `
+    };
+
+    
+</script>
 </html>

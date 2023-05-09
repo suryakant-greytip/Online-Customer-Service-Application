@@ -36,9 +36,12 @@ public class AdminController {
 	private OperatorService optService;
 	   
 	
-	@PostMapping("depart/add")
+	@PostMapping("/depart/add")
 	public ResponseEntity<Department>  addDepartment(@Valid @RequestBody Department deprt) throws LoginException{
-		  return new ResponseEntity<>(adminService.addDepartment(deprt, "ADMIN"), HttpStatus.CREATED);
+		  System.out.println(deprt);
+		  
+		  
+		return new ResponseEntity<>(adminService.addDepartment(deprt, "ADMIN"), HttpStatus.CREATED);
 	}
 	
 	@PutMapping("depart/update/{key}")
@@ -54,7 +57,7 @@ public class AdminController {
 		return new ResponseEntity<Department>(adminService.removeDepartment(deptId, key), HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("depart/get/{deptId}/{key}")
+	@GetMapping("depart/get/{deptId}")
 	public ResponseEntity<Department> getDepartmentById(@PathVariable Integer deptId, @PathVariable String key) throws LoginException, DepartmentException{
 		    
 	   return new ResponseEntity<Department>(adminService.getDepartmentById(deptId, key), HttpStatus.ACCEPTED);
