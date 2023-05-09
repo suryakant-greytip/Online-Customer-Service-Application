@@ -36,8 +36,10 @@ public class AdminController {
 	private OperatorService optService;
 	   
 	
-	@PostMapping("depart/add")
+	@PostMapping("/depart/add")
 	public ResponseEntity<Department>  addDepartment(@Valid @RequestBody Department deprt) throws LoginException{
+		  
+		return new ResponseEntity<>(adminService.addDepartment(deprt, "ADMIN"), HttpStatus.CREATED);
 		  return new ResponseEntity<>(adminService.addDepartment(deprt), HttpStatus.CREATED);
 	}
 	

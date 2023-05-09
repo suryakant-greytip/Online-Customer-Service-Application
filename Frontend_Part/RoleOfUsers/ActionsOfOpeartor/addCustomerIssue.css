@@ -168,13 +168,17 @@ body{
   }
 
   #resultant_data div{
-     margin: 30px;
+     margin: 40px;
      color: #000000;
+     text-align: center;
+     font-size: 25px;
   }
 
   #resultant_data h1{
     color: black;
     margin: auto;
+    margin-top: 20px;
+    font-size: 40px;
   }
 
 

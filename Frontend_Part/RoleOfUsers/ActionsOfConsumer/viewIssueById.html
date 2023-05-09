@@ -41,9 +41,75 @@
                 <label for="issueId">Issue Id<span>*</span> :</label>
                 <input id="issueId" type="text" placeholder="Enter Issue Id" required>
             </form>
-            <a href="#"><button>Find</button></a>
+            <a href="#"><button id="find">Find</button></a>
         </div>
     </div>
+    <div id="resultant_data">
 
+    </div>
 </body>
+<script>
+   
+    // document.getElementById("find").addEventListener("click",function(event){ 
+    //     let custId=+document.getElementById("custId").value;
+    //     console.log(custId);
+    // })
+    
+    
+    let find=document.getElementById("find");
+    find.addEventListener("click",function(event){
+        event.preventDefault();
+        let issueId=+document.getElementById("issueId").value;
+
+    if(issueId!==0){
+        fetch(`http://localhost:8080/customer/viewIssue/${issueId}`)
+        .then(response => response.json())
+        .then(data=>{
+            if(data.issueId!==undefined){
+                renderCards(data);
+            }
+            else{
+                errorMessage(data);
+            }
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    else{
+
+    }
+    });
+
+    function renderCards(issue){
+        let res_div=document.getElementById("resultant_data");
+        res_div.innerHTML="";
+
+        res_div.innerHTML+=`
+              <h1>Output :-</h1>
+              <div class="card">
+                <h3>IssueId : ${issue.issueId}</h3>
+                <h3>IssueType : ${issue.issueType}</h3>
+                <h3>Description MobileNo : ${issue.description}</h3>
+                <h3>Status : ${issue.status}</h3>
+              </div>  
+            `
+    };
+
+    function errorMessage(customer){
+        console.log(customer);
+        let res_div=document.getElementById("resultant_data");
+        res_div.innerHTML="";
+
+        res_div.innerHTML+=`
+              <div class="card">
+                <h3>timestamp : ${customer.timestamp}</h3>
+                <h3>details : ${customer.details}</h3>
+                <h3>message : ${customer.message}</h3>
+              </div>  
+            `
+    };
+
+    
+</script>
 </html>

@@ -49,9 +49,97 @@
                     <option value="closed">Closed</option>
                 </select>  
             </form>
-            <a href="#"><button>Add</button></a>
+            <a href="#"><button id="find">Add</button></a>
         </div>
     </div>
 
+    <div id="resultant_data">
+          
+    </div>
+
 </body>
+
+<script>
+   
+    // document.getElementById("find").addEventListener("click",function(event){ 
+    //     let custId=+document.getElementById("custId").value;
+    //     console.log(custId);
+    // })
+    
+    
+    let find=document.getElementById("find");
+    find.addEventListener("click",function(event){
+        event.preventDefault();
+        let issueType=document.getElementById("issueType").value;
+        let issueDesc=document.getElementById("issueType").value;
+        let issueStatus=document.getElementById("issueStatus").value;
+        
+        let data={
+            issueType:issueType,
+            description:issueDesc
+        };
+
+    if(issueType!="" && issueDesc!="" && issueStatus!=""){
+        fetch(`http://localhost:8080/operators/addIssue`,{
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.text())
+        .then(data=>{
+         console.log(data);
+         let res_div=document.getElementById("resultant_data");
+         res_div.innerHTML="";
+         res_div.innerHTML+=`
+         <h1>Output :-</h1>
+         `
+         res_div.innerHTML+=`
+               <div class="card">
+                 <h3>${data}</h3>
+                 `
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    else{
+
+    }
+    });
+
+    // function renderCards(data){
+    //     let res_div=document.getElementById("resultant_data");
+    //     res_div.innerHTML="";
+    //     res_div.innerHTML+=`
+    //     <h1>Output :-</h1>
+    //     `
+    //     res_div.innerHTML+=`
+    //           <div class="card">
+    //             <h3>CustomerId : ${customer.customerId}</h3>
+    //             <h3>CustomerName : ${customer.firstName+" "+customer.lastName}</h3>
+    //             <h3>Customer MobileNo : ${customer.mobile}</h3>
+    //             <h3>Customer City : ${customer.city}</h3>
+    //             <h3>Customer EmailId : ${customer.email}</h3> 
+    //           </div>  
+    //         `
+    // };
+
+    // function errorMessage(customer){
+    //     console.log(customer);
+    //     let res_div=document.getElementById("resultant_data");
+    //     res_div.innerHTML="";
+
+    //     res_div.innerHTML+=`
+    //           <div class="card">
+    //             <h3>timestamp : ${customer.timestamp}</h3>
+    //             <h3>details : ${customer.details}</h3>
+    //             <h3>message : ${customer.message}</h3>
+    //           </div>  
+    //         `
+    // };
+
+    
+</script>
 </html>
