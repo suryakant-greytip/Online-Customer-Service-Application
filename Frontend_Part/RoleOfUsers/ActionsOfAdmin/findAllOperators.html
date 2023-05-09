@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./addDepartment.css">
-    <title>FindDepartmentById</title>
+    <link rel="stylesheet" href="../ActionsOfAdmin/findAllOperators.css">
+    <title>FindAll</title>
 </head>
 <body>
     <!-- navbar -->
@@ -34,41 +34,30 @@
     
     <div id="menu" class="menu">
         <div>
-            <h2>Enter Department Id :</h2>
+            <h2>Find All Customers :</h2>
         </div>
         <div>
-            <form action="#">
-                <label for="deptId">Department Id<span>*</span> :</label>
-                <input id="deptId" type="text" placeholder="Enter Department Id" >
-            </form>
-            <a href="#"><button id="find">Find</button></a>
+            <a href="#" ><button id="find">Find</button></a>
         </div>
     </div>
-    <div id="resultant_data">
 
+    <div id="resultant_data">
+          
     </div>
 
 </body>
-<script>
-   
-    // document.getElementById("find").addEventListener("click",function(event){ 
-    //     let custId=+document.getElementById("custId").value;
-    //     console.log(custId);
-    // })
+<script>  
     
-    
-    let add=document.getElementById("find");
-    add.addEventListener("click",function(event){
+    let find=document.getElementById("find");
+    find.addEventListener("click",function(event){
         event.preventDefault();
-        let deptId=+document.getElementById("deptId").value;
 
-
-    if(deptId!==0){
-        fetch(`http://localhost:8080/depart/get/${deptId}`)
+    if(true){
+        fetch(`http://localhost:8080/operator/all`)
         .then(response => response.json())
         .then(data=>{
-         console.log(data);
-         if(data.deptId===undefined){
+            
+            if(data[0].operatorId==undefined){
                 errorMessage(data);
             }
             else{
@@ -80,7 +69,7 @@
         })
     }
     else{
-       alert("Input boxes are mandatory")
+
     }
     });
 
@@ -88,29 +77,31 @@
         let res_div=document.getElementById("resultant_data");
         res_div.innerHTML="";
         res_div.innerHTML+=`
-        <h1>Output :-</h1>
-        `
-        res_div.innerHTML+=`
+              <h1>Output :-</h1>
+              `
+        data.forEach(customer => {
+            res_div.innerHTML+=`
               <div class="card">
-                <h3>CustomerId : ${data.deptId}</h3>
-                <h3>CustomerName : ${data.deptName}</h3>
+                <h3>CustomerId : ${customer.operatorId}</h3>
+                <h3>CustomerName : ${customer.firstName+" "+customer.lastName}</h3>
+                <h3>Customer MobileNo : ${customer.mobile}</h3>
+                <h3>Customer City : ${customer.city}</h3>
+                <h3>Customer Email : ${customer.email}</h3> 
               </div>  
             `
+        });
+        
     };
 
-    function errorMessage(data){
-        console.log(data);
+    function errorMessage(customer){
         let res_div=document.getElementById("resultant_data");
         res_div.innerHTML="";
-        res_div.innerHTML+=`
-        <h1>Output :-</h1>
-        `
 
         res_div.innerHTML+=`
               <div class="card">
-                <h3>timestamp : ${data.timestamp}</h3>
-                <h3>details : ${data.details}</h3>
-                <h3>message : ${data.message}</h3>
+                <h3>timestamp : ${customer.timestamp}</h3>
+                <h3>details : ${customer.details}</h3>
+                <h3>message : ${customer.message}</h3>
               </div>  
             `
     };
@@ -118,3 +109,8 @@
     
 </script>
 </html>
+
+
+
+
+
